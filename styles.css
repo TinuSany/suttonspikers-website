@@ -477,82 +477,6 @@ h3 {
   box-shadow: var(--shadow);
 }
 
-.agm-feature {
-  display: grid;
-  grid-template-columns: minmax(0, 0.72fr) minmax(280px, 0.72fr);
-  gap: 1.5rem;
-  align-items: center;
-  max-width: 960px;
-}
-
-.agm-feature__content,
-.agm-feature__poster {
-  border-radius: var(--radius);
-  box-shadow: var(--shadow);
-}
-
-.agm-feature__content {
-  padding: 1.35rem;
-  background:
-    linear-gradient(180deg, rgba(23, 58, 114, 0.98), rgba(12, 34, 70, 0.98)),
-    radial-gradient(circle at right top, rgba(255, 217, 77, 0.26), transparent 34%);
-  border: 1px solid rgba(255, 217, 77, 0.26);
-  color: #fff;
-}
-
-.agm-feature__content h2 {
-  margin-bottom: 0.6rem;
-  color: #fff;
-  font-size: clamp(1.9rem, 4vw, 2.45rem);
-}
-
-.agm-feature__content p {
-  margin: 0;
-  color: rgba(255, 255, 255, 0.84);
-}
-
-.agm-feature__content .eyebrow {
-  color: var(--secondary);
-}
-
-.agm-feature__poster {
-  overflow: hidden;
-  background: #071a35;
-  border: 1px solid rgba(23, 58, 114, 0.1);
-}
-
-.agm-feature__poster img {
-  width: 100%;
-}
-
-.agm-details {
-  display: grid;
-  gap: 0.55rem;
-  margin: 1rem 0 0;
-}
-
-.agm-details div {
-  padding: 0.75rem 0.85rem;
-  border-radius: 16px;
-  background: rgba(255, 255, 255, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.14);
-}
-
-.agm-details dt {
-  color: rgba(255, 255, 255, 0.68);
-  font-size: 0.85rem;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-}
-
-.agm-details dd {
-  margin: 0.2rem 0 0;
-  color: #fff;
-  font-size: 1rem;
-  font-weight: 800;
-}
-
 .training-badges {
   display: flex;
   flex-wrap: wrap;
@@ -1156,7 +1080,6 @@ h3 {
   .expect-grid,
   .affiliation-grid,
   .kit-showcase,
-  .agm-feature,
   .home-photo-feature,
   .home-spotlight,
   .sponsor-preview,
