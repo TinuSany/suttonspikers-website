@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-labelledby="title">
+  <title id="title">Away match travel</title>
+  <defs>
+    <linearGradient id="tile" x1="8" y1="8" x2="56" y2="56" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#1e68c8"/>
+      <stop offset="1" stop-color="#173a72"/>
+    </linearGradient>
+    <linearGradient id="bus" x1="13" y1="22" x2="52" y2="44" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#ffffff"/>
+      <stop offset="1" stop-color="#edf4ff"/>
+    </linearGradient>
+  </defs>
+  <rect width="64" height="64" rx="18" fill="url(#tile)"/>
+  <path d="M12 31c0-4.4 3.6-8 8-8h22c4.4 0 8.6 2.5 10.7 6.4l2.3 4.2V43H12V31Z" fill="url(#bus)" stroke="#d8e7ff" stroke-width="2.5" stroke-linejoin="round"/>
+  <path d="M18 28h8v8h-8zM30 28h8v8h-8zM42 29.5h6.5l2 3.8H42z" fill="#173a72" opacity=".95"/>
+  <path d="M13 39h41" stroke="#1e68c8" stroke-width="3" stroke-linecap="round"/>
+  <circle cx="22" cy="44" r="5" fill="#ffd94d" stroke="#173a72" stroke-width="2.4"/>
+  <circle cx="45" cy="44" r="5" fill="#ffd94d" stroke="#173a72" stroke-width="2.4"/>
+  <circle cx="22" cy="44" r="1.5" fill="#173a72"/>
+  <circle cx="45" cy="44" r="1.5" fill="#173a72"/>
+  <path d="M14 50h40" stroke="#ffd94d" stroke-width="3" stroke-linecap="round" opacity=".9"/>
+  <path d="M16 22h24" stroke="#ffd94d" stroke-width="3" stroke-linecap="round"/>
+</svg>
