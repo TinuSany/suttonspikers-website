@@ -477,6 +477,90 @@ h3 {
   box-shadow: var(--shadow);
 }
 
+.team-showcase__heading {
+  max-width: 48rem;
+}
+
+.team-showcase__heading h2 + p {
+  max-width: 44rem;
+}
+
+.team-showcase {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.25rem;
+  align-items: stretch;
+}
+
+.team-profile {
+  display: grid;
+  grid-template-rows: auto 1fr;
+  overflow: hidden;
+  border-radius: var(--radius);
+  background: rgba(255, 255, 255, 0.92);
+  border: 1px solid rgba(23, 58, 114, 0.08);
+  box-shadow: var(--shadow);
+}
+
+.team-profile__photo-frame {
+  position: relative;
+  aspect-ratio: 4 / 3;
+  min-height: 0;
+  overflow: hidden;
+  padding: 0.5rem;
+  background: rgba(237, 244, 255, 0.82);
+}
+
+.team-profile__photo {
+  position: absolute;
+  inset: 0.5rem;
+  width: calc(100% - 1rem);
+  height: calc(100% - 1rem);
+  border-radius: calc(var(--radius) - 6px);
+  object-fit: contain;
+}
+
+.team-profile__content {
+  display: grid;
+  grid-template-rows: auto auto 1fr;
+  gap: 1rem;
+  padding: 1.2rem 1.25rem 1.3rem;
+}
+
+.team-profile__content .text-link {
+  align-self: end;
+}
+
+.team-profile__content h3 {
+  margin-bottom: 0;
+  font-size: clamp(1.65rem, 3vw, 2.15rem);
+}
+
+.team-profile__record {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.team-profile__record span {
+  padding: 0.35rem 0.65rem;
+  border-radius: 999px;
+  background: rgba(23, 58, 114, 0.07);
+  color: var(--primary-deep);
+  font-size: 0.82rem;
+  font-weight: 800;
+  white-space: nowrap;
+}
+
+.team-showcase__motto {
+  margin: 1.25rem 0 0;
+  color: var(--primary-deep);
+  font-family: "Barlow Condensed", sans-serif;
+  font-size: 1.25rem;
+  font-weight: 700;
+  text-align: center;
+}
+
 .training-badges {
   display: flex;
   flex-wrap: wrap;
@@ -712,6 +796,42 @@ h3 {
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 1.25rem;
   align-items: stretch;
+}
+
+.season-record {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  margin: -0.25rem 0 1.25rem;
+  overflow: hidden;
+  border-radius: var(--radius-sm);
+  background: linear-gradient(135deg, var(--primary-deep), var(--primary));
+  box-shadow: 0 14px 28px rgba(23, 58, 114, 0.14);
+}
+
+.season-record div {
+  display: grid;
+  gap: 0.15rem;
+  padding: 0.75rem 1rem;
+  text-align: center;
+}
+
+.season-record div + div {
+  border-left: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+.season-record span {
+  color: rgba(255, 255, 255, 0.72);
+  font-size: 0.76rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.season-record strong {
+  color: #fff;
+  font-family: "Barlow Condensed", sans-serif;
+  font-size: 1.35rem;
+  line-height: 1;
 }
 
 .season-heading {
@@ -1321,6 +1441,11 @@ h3 {
   color: #1d6b3e;
 }
 
+.match-status--loss {
+  background: rgba(178, 56, 56, 0.12);
+  color: #9f2f2f;
+}
+
 .home-away {
   display: inline-flex;
   align-items: center;
@@ -1569,6 +1694,7 @@ h3 {
   .hero__grid,
   .card-grid,
   .season-compact-grid,
+  .team-showcase,
   .feature-split,
   .content-grid,
   .contact-grid,
