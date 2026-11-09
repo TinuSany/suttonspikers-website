@@ -50,8 +50,16 @@ if (fixturesApp && fixturesDataNode) {
   const teamName = (name) =>
     clubTeams.has(name) ? `<strong class="club-team">${escapeHtml(name)}</strong>` : escapeHtml(name);
 
-  const resultText = (fixture) =>
-    fixture.status === "completed" ? `${fixture.homeSets}-${fixture.awaySets}` : "Upcoming";
+  const resultText = (fixture, team) => {
+    if (fixture.status !== "completed") {
+      return "Upcoming";
+    }
+
+    const isHome = fixture.homeTeam === team.name;
+    const setsWon = isHome ? fixture.homeSets : fixture.awaySets;
+    const setsLost = isHome ? fixture.awaySets : fixture.homeSets;
+    return `${setsWon}-${setsLost}`;
+  };
 
   const matchLocation = (fixture, team) => fixture.homeTeam === team.name ? "Home" : "Away";
 
@@ -63,9 +71,12 @@ if (fixturesApp && fixturesDataNode) {
     return `<span class="home-away home-away--${location.toLowerCase()}" aria-label="${location} match" title="${location} match"></span>`;
   };
 
-  const statusMarkup = (fixture) => {
+  const statusMarkup = (fixture, team) => {
     if (fixture.status === "completed") {
-      return `<span class="match-status match-status--win">Won ${resultText(fixture)}</span>`;
+      const result = teamResult(fixture, team);
+      const outcome = result.won ? "Won" : "Lost";
+      const outcomeClass = result.won ? "win" : "loss";
+      return `<span class="match-status match-status--${outcomeClass}">${outcome} ${resultText(fixture, team)}</span>`;
     }
 
     return `<span class="match-status">Upcoming</span>`;
@@ -81,12 +92,28 @@ if (fixturesApp && fixturesDataNode) {
       .join("");
   };
 
+  const teamResult = (fixture, team) => {
+    const isHome = fixture.homeTeam === team.name;
+    const setsWon = isHome ? fixture.homeSets : fixture.awaySets;
+    const setsLost = isHome ? fixture.awaySets : fixture.homeSets;
+
+    return { setsWon, setsLost, won: setsWon > setsLost };
+  };
+
   const render = (teamKey) => {
     const team = fixturesData.teams[teamKey];
     const fixtures = fixturesData.fixtures.filter((fixture) => fixture.team === teamKey);
     const results = fixtures
       .filter((fixture) => fixture.status === "completed")
       .sort((a, b) => new Date(b.date) - new Date(a.date));
+    const record = results.reduce((totals, fixture) => {
+      const result = teamResult(fixture, team);
+      totals.won += result.won ? 1 : 0;
+      totals.lost += result.won ? 0 : 1;
+      totals.setsWon += result.setsWon;
+      totals.setsLost += result.setsLost;
+      return totals;
+    }, { won: 0, lost: 0, setsWon: 0, setsLost: 0 });
 
     tabs.forEach((tab) => {
       const isActive = tab.dataset.fixturesTeam === teamKey;
@@ -101,7 +128,10 @@ if (fixturesApp && fixturesDataNode) {
         <p>${escapeHtml(team.summary)}</p>
         <div class="fixtures-team-card__meta" aria-label="${escapeHtml(team.shortName)} fixture summary">
           <span>${fixtures.length} fixtures</span>
-          <span>${results.length} result${results.length === 1 ? "" : "s"}</span>
+          <span>Played ${results.length}</span>
+          <span>Won ${record.won}</span>
+          <span>Lost ${record.lost}</span>
+          <span>Sets ${record.setsWon}-${record.setsLost}</span>
         </div>
       </article>
     `;
@@ -120,7 +150,7 @@ if (fixturesApp && fixturesDataNode) {
         <td>${escapeHtml(opponentName(fixture, team))}</td>
         <td>${homeAwayMarkup(fixture, team)}</td>
         <td>${venueLink(fixture.venue)}</td>
-        <td>${statusMarkup(fixture)}</td>
+        <td>${statusMarkup(fixture, team)}</td>
       </tr>
     `).join("");
 
@@ -136,7 +166,7 @@ if (fixturesApp && fixturesDataNode) {
         </div>
         <div class="fixture-card__meta">
           <span>${venueLink(fixture.venue)}</span>
-          ${statusMarkup(fixture)}
+          ${statusMarkup(fixture, team)}
         </div>
       </article>
     `).join("");
@@ -161,10 +191,12 @@ if (fixturesApp && fixturesDataNode) {
           <span class="result-scoreline__team result-scoreline__team--right">${teamName(fixture.awayTeam)}</span>
         </div>
         <p class="result-card__venue">${venueLink(fixture.venue)}</p>
-        <div class="set-breakdown" aria-label="Individual set scores">
-          <p>Set scores</p>
-          <div>${setScores(fixture)}</div>
-        </div>
+        ${fixture.setScores?.length ? `
+          <div class="set-breakdown" aria-label="Individual set scores">
+            <p>Set scores</p>
+            <div>${setScores(fixture)}</div>
+          </div>
+        ` : ""}
       </article>
     `).join("");
   };
